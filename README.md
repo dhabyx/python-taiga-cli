@@ -1,60 +1,61 @@
 # Taiga CLI
 
-`taiga-cli` es una herramienta de línea de comandos (CLI) diseñada para interactuar con una instancia de **Taiga**, una plataforma de gestión de proyectos ágil. Esta CLI permite a los usuarios gestionar configuraciones, proyectos, sprints e historias de usuario de manera eficiente y rápida desde la terminal.
+`taiga-cli` is a command-line interface (CLI) tool designed to interact with a **Taiga** instance, an agile project management platform. This CLI allows users to manage configurations, projects, sprints, and user stories efficiently and quickly from the terminal.
 
 ---
 
-## **Instalación**
+## **Installation**
 
-1. **Clonar el repositorio**:
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/dhabyx/python-taiga-cli.git
    cd taiga-cli
    ```
 
-2. **Instalar la herramienta**:
-   Usa `pip` para instalar el proyecto como una aplicación CLI global:
+2. **Install the tool**:
+   Use `pip` to install the project as a global CLI application:
    ```bash
    pip install .
    ```
 
-   Esto instalará la herramienta y configurará el comando `taiga` para ejecutarse desde cualquier ubicación en tu terminal.
+   This will install the tool and set up the `taiga` command to be executed from anywhere in your terminal.
 
-3. **Verifica la instalación**:
+3. **Verify the installation**:
    ```bash
    taiga --help
    ```
 
-   Si ves el menú de ayuda, ¡todo está listo!
+   If you see the help menu, everything is set!
 
-4. **Actualizar la herramienta**:
-   Si realizas cambios locales o deseas actualizar desde el repositorio, puedes reinstalar:
+4. **Update the tool**:
+   If you make local changes or want to update from the repository, reinstall it:
    ```bash
    pip install --upgrade .
    ```
 
-5. **Desinstalar la herramienta**:
-   Si necesitas eliminar la CLI, usa:
+5. **Uninstall the tool**:
+   If you need to remove the CLI, use:
    ```bash
    pip uninstall taiga-cli
    ```
+
 ---
 
-## **Comandos**
+## **Commands**
 
-### **1. Configuración (`config`)**
-Configura el servidor y las credenciales del usuario.
+### **1. Configuration (`config`)**
+Set up the server and user credentials.
 
 ```bash
 taiga config
 ```
 
-Sigue las instrucciones interactivas para configurar el servidor Taiga y las credenciales de usuario.
+Follow the interactive instructions to configure the Taiga server and user credentials.
 
 ---
 
-### **2. Iniciar sesión (`login`)**
-Autentícate en tu instancia de Taiga.
+### **2. Login (`login`)**
+Authenticate with your Taiga instance.
 
 ```bash
 taiga login
@@ -62,126 +63,127 @@ taiga login
 
 ---
 
-### **3. Gestión de Proyectos (`project`)**
+### **3. Project Management (`project`)**
 
-- **Listar proyectos propios**:
+- **List your own projects**:
   ```bash
   taiga project ls
   ```
 
-- **Listar todos los proyectos**:
+- **List all projects**:
   ```bash
   taiga project ls --all
   ```
 
-- **Mostrar proyecto por defecto**:
+- **Show default project**:
   ```bash
   taiga project default
   ```
 
-- **Configurar un proyecto como predeterminado**:
+- **Set a project as the default**:
   ```bash
   taiga project set-default <project-slug>
   ```
 
 ---
 
-### **4. Gestión de Sprints (`sprint`)**
+### **4. Sprint Management (`sprint`)**
 
-- **Listar sprints del proyecto por defecto**:
+- **List sprints of the default project**:
   ```bash
   taiga sprint ls
   ```
 
-- **Listar sprints de un proyecto específico**:
+- **List sprints of a specific project**:
   ```bash
   taiga sprint ls --project=<project-slug>
   ```
 
-- **Ver estadísticas del usuario en un sprint**:
+- **View user statistics for a sprint**:
   ```bash
   taiga sprint user-stats
   ```
 
-- **Ver estadísticas de un usuario específico**:
+- **View statistics of a specific user**:
   ```bash
   taiga sprint user-stats --user=<username>
   ```
 
-- **Ver estadísticas de todos los usuarios**:
+- **View statistics for all users**:
   ```bash
   taiga sprint user-stats --all-users
   ```
 
-- **Ver estadísticas de un proyecto específico**:
+- **View statistics for a specific project**:
   ```bash
   taiga sprint user-stats --project=<project-slug>
   ```
 
-- **Ver estadísticas de un sprint específico**:
+- **View statistics for a specific sprint**:
   ```bash
   taiga sprint user-stats --sprint=<sprint-slug>
   ```
 
-- **Listar historias de usuario de un sprint**:
+- **List user stories for a sprint**:
   ```bash
   taiga sprint user-stories
   ```
 
-- **Listar historias de un usuario específico**:
+- **List stories for a specific user**:
   ```bash
   taiga sprint user-stories --user=<username>
   ```
 
-- **Listar historias de todos los usuarios**:
+- **List stories for all users**:
   ```bash
   taiga sprint user-stories --all-users
   ```
 
 ---
 
-### **5. Gestión de Historias de Usuario (`stories`)**
+### **5. User Stories Management (`stories`)**
 
-- **Listar historias propias**:
+- **List your own stories**:
   ```bash
   taiga stories ls
   ```
 
-- **Listar historias de todos los sprints**:
+- **List stories from all sprints**:
   ```bash
   taiga stories ls --all-sprints
   ```
 
-- **Filtrar historias por usuario**:
+- **Filter stories by user**:
   ```bash
   taiga stories ls --user=<username>
   ```
 
-- **Filtrar historias por estado**:
+- **Filter stories by status**:
   ```bash
   taiga stories ls --status=open
   taiga stories ls --status=closed
   ```
 
-- **Filtrar historias por sprint**:
+- **Filter stories by sprint**:
   ```bash
   taiga stories ls --sprint=<sprint-slug>
   ```
 
-- **Filtrar historias de un proyecto específico**:
+- **Filter stories by a specific project**:
   ```bash
   taiga sprint user-stats --project=<project-slug>
-  ``` 
-  
-### **6. Gestión de Configuración**
-
-`taiga-cli` almacena su configuración en un archivo en el sistema del usuario. Esta configuración incluye detalles 
-como el servidor Taiga, las credenciales de usuario y los valores predeterminados para proyectos y sprints.
+  ```
 
 ---
 
-#### **Ubicación del Archivo de Configuración**
-El archivo de configuración se encuentra en la siguiente ubicación, dependiendo del sistema operativo:
+### **6. Configuration Management**
+
+`taiga-cli` stores its configuration in a file on the user's system. This configuration includes details such as the Taiga server, user credentials, and default values for projects and sprints.
+
+---
+
+#### **Configuration File Location**
+The configuration file is located in the following paths depending on the operating system:
 
 - **Linux**:
   ```bash
@@ -194,66 +196,70 @@ El archivo de configuración se encuentra en la siguiente ubicación, dependiend
   ```
 
 - **Windows**:
-  (No se ha diseñado explícitamente para Windows, pero podrías adaptarlo).
+  (Explicit support for Windows is not designed, but you could adapt it).
 
 ---
 
-#### **Limpiar la Configuración**
-Si deseas borrar toda la configuración almacenada y reiniciar la herramienta:
+#### **Clear Configuration**
+If you want to reset all stored configuration and restart the tool:
 
-1. **Eliminar el archivo de configuración**:
-   - En Linux:
+1. **Delete the configuration file**:
+   - On Linux:
      ```bash
      rm ~/.config/taiga-cli/config.json
      ```
-   - En macOS:
+   - On macOS:
      ```bash
      rm ~/Library/Application\\ Support/taiga-cli/config.json
      ```
 
-2. **Crear nuevamente la configuración**:
-   Después de eliminar el archivo, al ejecutar `taiga config`, se te pedirá ingresar los detalles nuevamente:
+2. **Recreate the configuration**:
+   After deleting the file, running `taiga config` will prompt you to re-enter the details:
    ```bash
    taiga config
    ```
 
 ---
 
-#### **Precaución**
-Eliminar este archivo de configuración:
-- Restablecerá el servidor, las credenciales y cualquier valor predeterminado configurado.
-- No afecta los datos almacenados en la instancia de Taiga que estás utilizando.
+#### **Warning**
+Deleting this configuration file:
+- Resets the server, credentials, and any configured default values.
+- Does not affect data stored in the Taiga instance you are using.
 
 ---
 
-## **Ayuda**
-Para ver todas las opciones y comandos disponibles:
+## **Help**
+To view all available options and commands:
 ```bash
 taiga --help
 ```
 
-Para un comando específico:
+For a specific command:
 ```bash
 taiga <command> --help
 ```
 
 ---
 
-## **Contribuciones**
-1. **Bifurca (Fork) este repositorio.**
-2. **Crea una nueva rama:**
+## **Contributing**
+1. **Fork this repository.**
+2. **Create a new branch:**
    ```bash
-   git checkout -b feature/nueva-funcionalidad
+   git checkout -b feature/new-functionality
    ```
 
-3. **Realiza cambios y haz un commit:**
+3. **Make changes and commit:**
    ```bash
-   git commit -m "Añadir nueva funcionalidad"
+   git commit -m "Add new functionality"
    ```
 
-4. **Haz un push y abre un Pull Request.**
+4. **Push and open a Pull Request.**
 
 ---
 
-## **Licencia**
-`taiga-cli` está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más información.
+## **License**
+`taiga-cli` is under the MIT License. See the `LICENSE` file for more information.
+
+---
+
+If you have further improvements or additional details, let me know!
