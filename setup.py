@@ -9,7 +9,9 @@ setup(
             'taiga=taiga_cli.main:main',
         ],
     },
-    install_requires=[],
+    install_requires=[
+        'python-taiga~=1.3.0',
+    ],
     description='CLI tool for taiga.io',
     author='Dhaby Xiloj',
     author_email='dxiloj@gmail.com',
