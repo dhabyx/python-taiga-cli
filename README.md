@@ -1,4 +1,4 @@
-### Taiga CLI
+# Taiga CLI
 
 `taiga-cli` es una herramienta de línea de comandos (CLI) diseñada para interactuar con una instancia de **Taiga**, una plataforma de gestión de proyectos ágil. Esta CLI permite a los usuarios gestionar configuraciones, proyectos, sprints e historias de usuario de manera eficiente y rápida desde la terminal.
 
