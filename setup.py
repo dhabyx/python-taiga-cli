@@ -12,8 +12,8 @@ setup(
     install_requires=[],
     description='CLI tool for taiga.io',
     author='Dhaby Xiloj',
-    author_email='dxiloj@deltatracking.com',
-    url='https://github.com/dhabyx/taiga-cli',
+    author_email='dxiloj@gmail.com',
+    url='https://github.com/dhabyx/python-taiga-cli',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
