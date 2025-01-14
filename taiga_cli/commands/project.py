@@ -88,7 +88,7 @@ def run(args):
             list_projects(user_only=True)
     elif command == "default":
         list_default_project()
-    elif command == "set-default" and len(args) == 2:
+    elif command == "set-default" and len(args) >= 2:
         set_default_project(args[1])
     else:
         parser.print_help()
