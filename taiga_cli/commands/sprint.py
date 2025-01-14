@@ -1,5 +1,5 @@
-from taiga_cli.commands.config import load_config, save_config
-from taiga_cli.commands.login import get_api_and_project, get_api_and_defaults
+from taiga_cli.commands.login import get_api_instance, get_api_and_project, get_api_and_defaults
+from taiga_cli.commands.project import load_config, save_config
 from taiga_cli.cliparser import parser
 
 
@@ -172,10 +172,6 @@ def run(args):
 
     if command == "ls":
         list_sprints(project_slug=project_slug)
-    elif command == "set-default" and len(args) >= 2:
-        set_default_sprint(args[1])
-    elif command == "default":
-        list_default_sprint()
     elif command == "user-stats":
         sprint_user_stats(sprint_slug=sprint_slug, project_slug=project_slug, user=user, all_users=all_users)
     elif command == "user-stories":
