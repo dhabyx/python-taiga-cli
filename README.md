@@ -89,6 +89,11 @@ taiga login
 
 ### **4. Sprint Management (`sprint`)**
 
+- **Set a sprint as the default**:
+  ```bash
+  taiga sprint set-default <sprint-slug>
+  ```
+
 - **List sprints of the default project**:
   ```bash
   taiga sprint ls
