@@ -1,3 +1,4 @@
+from taiga_cli.commands.config import load_config, save_config
 from taiga_cli.commands.login import get_api_and_project, get_api_and_defaults
 from taiga_cli.cliparser import parser
 
@@ -109,6 +110,44 @@ def list_user_stories(project_slug=None, sprint_slug=None, user=None, all_users=
         print(f"Error fetching user stories: {e}")
 
 
+def set_default_sprint(sprint_slug):
+    """Set a default sprint by its slug."""
+    config = load_config()
+    if not config:
+        print("Configuration not found. Please run `taiga config` first.")
+        return
+
+    api = get_api_and_project(None)[0]
+
+    try:
+        project_slug = config.get("default_project")
+        if not project_slug:
+            print("No default project is set. Use `taiga project set-default <slug>` first.")
+            return
+
+        _, sprint = get_project_and_sprint(api, project_slug, sprint_slug)
+        config["default_sprint"] = sprint_slug
+        save_config(config)
+        print(f"Default sprint set to '{sprint.name}' (slug: {sprint.slug}).")
+    except Exception as e:
+        print(f"Error setting default sprint: {e}")
+
+
+def list_default_sprint():
+    """List the default configured sprint."""
+    config = load_config()
+    if not config:
+        print("Configuration not found. Please run `taiga config` first.")
+        return
+
+    default_sprint = config.get("default_sprint")
+    if not default_sprint:
+        print("No default sprint is set. Use `taiga sprint set-default <slug>` to configure one.")
+        return
+
+    print(f"Default sprint: {default_sprint}")
+
+
 def run(args):
     """Handle the `taiga sprint` command."""
     if len(args) < 1:
@@ -133,6 +172,10 @@ def run(args):
 
     if command == "ls":
         list_sprints(project_slug=project_slug)
+    elif command == "set-default" and len(args) >= 2:
+        set_default_sprint(args[1])
+    elif command == "default":
+        list_default_sprint()
     elif command == "user-stats":
         sprint_user_stats(sprint_slug=sprint_slug, project_slug=project_slug, user=user, all_users=all_users)
     elif command == "user-stories":
