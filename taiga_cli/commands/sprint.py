@@ -1,5 +1,50 @@
-from taiga_cli.commands.login import get_api_and_project, get_api_and_defaults
+from taiga_cli.commands.login import get_api_instance, get_api_and_project, get_api_and_defaults
+from taiga_cli.commands.project import load_config, save_config
 from taiga_cli.cliparser import parser
+
+
+def set_default_sprint(sprint_slug, project_slug=None):
+    config = load_config()
+    if not config:
+        print("Configuration not found. Please run `taiga config` first.")
+        return
+
+    api = get_api_instance()
+    if not api:
+        print("Unable to authenticate. Please log in using `taiga login`.")
+        return
+
+    try:
+        projects = api.projects.list()
+        project = next((p for p in projects if p.slug == get_default_project()), None)
+        if not project:
+            raise ValueError(f"Project with slug '{get_default_project()}' not found.")
+
+        sprints = api.milestones.list(project=project.id)
+        sprint = next((s for s in sprints if s.slug == sprint_slug), None)
+        if not sprint:
+            print(f"Sprint with slug '{sprint_slug}' not found in project '{project.name}'.")
+            return
+
+        config["default_sprint"] = sprint_slug
+        save_config(config)
+        print(f"Default sprint set to '{sprint.name}' (slug: {sprint_slug}).")
+    except Exception as e:
+        print(f"Error setting default sprint: {e}")
+
+
+def get_default_sprint():
+    config = load_config()
+    if not config:
+        return None
+    return config.get("default_sprint", None)
+
+
+def get_default_project():
+    config = load_config()
+    if not config:
+        return None
+    return config.get("default_project", None)
 
 
 def get_project_and_sprint(api, project_slug, sprint_slug=None):
@@ -136,7 +181,13 @@ def run(args):
     elif command == "user-stats":
         sprint_user_stats(sprint_slug=sprint_slug, project_slug=project_slug, user=user, all_users=all_users)
     elif command == "user-stories":
+        if not sprint_slug:
+            sprint_slug = get_default_sprint()
+            if not sprint_slug:
+                print("No default sprint set. Use `taiga sprint set-default <slug>` to set a default sprint.")
+                return
         list_user_stories(project_slug=project_slug, sprint_slug=sprint_slug, user=user, all_users=all_users)
+    elif command == "set-default" and len(args) >= 2:
+        set_default_sprint(args[1])
     else:
         parser.print_help()
-
