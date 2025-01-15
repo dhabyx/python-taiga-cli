@@ -172,6 +172,10 @@ def run(args):
 
     if command == "ls":
         list_sprints(project_slug=project_slug)
+    elif command == "default":
+        list_default_sprint()
+    elif command == "set-default" and len(args) >= 2:
+        set_default_sprint(args[1])
     elif command == "user-stats":
         sprint_user_stats(sprint_slug=sprint_slug, project_slug=project_slug, user=user, all_users=all_users)
     elif command == "user-stories":
